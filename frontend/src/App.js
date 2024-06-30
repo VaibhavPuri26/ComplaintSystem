@@ -4,6 +4,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Admin from './pages/Admin';
+import Cover from './pages/Cover';
 
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin" element={<Admin />} />
-        <Route exact path="/" element={<Login />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route path="/" element={<Cover />} />
       </Routes>
     </div>
   );
