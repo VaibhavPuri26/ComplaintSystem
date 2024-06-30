@@ -1,136 +1,81 @@
-/* Dashboard.css */
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 .container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
-  background-color: rgb(220, 238, 244); /* Light blue background */
-}
-
-.overlay-background {
-  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  min-height: 100vh;
+  background-image: url('https://www.ibelievebible.com/content/images/2017/02/Silence.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
   padding: 20px;
-  border-radius: 10px;
 }
 
 .content {
-  max-width: 100%; /* Adjusted to full width for smaller screens */
+  background-color: rgba(255, 255, 255, 0.7);
   padding: 20px;
-  background-color: white;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.form-control {
-  margin-bottom: 15px;
-  padding: 0.75rem;
-  font-size: 1rem;
-  border: 1px solid #ced4da;
-  border-radius: 5px;
-  transition: border-color 0.3s;
-}
-
-.form-control:focus {
-  border-color: #80bdff;
-  outline: none;
-  box-shadow: 0 0 5px rgba(128, 189, 255, 0.5);
-}
-
-textarea.form-control {
-  height: 150px;
-  resize: vertical;
-}
-
-.btn {
-  margin-top: 15px;
-  padding: 0.75rem 1.25rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.btn-warning {
-  background-color: darkcyan;
-  border-color: #f0e6e6;
-  color: #212529;
-}
-
-.btn-warning:hover {
-  background-color: darkcyan;
-  border-color: #0b2b18;
-  color: #212529;
-}
-
-.btn-info {
-  background-color: #17a2b8;
-  border-color: #17a2b8;
-  color: #fff;
-}
-
-.btn-info:hover {
-  background-color: #138496;
-  border-color: #138496;
-  color: #fff;
-}
-
-h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #fffdf5;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
 }
 
 .alert {
-  padding: 10px 20px;
-  margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.9); 
+  color: #333;
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.alert-warning {
-  background-color: #ffffff;
-  border-color: #ffffff;
-  color: #212529;
-}
-
-@media (max-width: 768px) {
-  .content {
-    max-width: 90%;
-  }
-}
-
-@media (max-width: 576px) {
-  .content {
-    padding: 15px;
-  }
-}
-
-/* Custom file input styles */
-.file-input-container {
-  position: relative;
-  width: 100%;
-  margin-bottom: 15px;
-}
-
-.file-input {
-  display: none;
-}
-
-.file-input-label {
-  display: block;
-  padding: 0.75rem 1.25rem;
-  font-size: 1rem;
-  color: #ffffff;
-  background-color: #17a2b8;
+.btn {
+  padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  text-align: center;
-  transition: background-color 0.3s;
+  margin-top: 20px;
 }
 
-.file-input-label:hover {
-  background-color: #138496;
+.btn-warning {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.btn-warning:hover {
+  background-color: #ffca2c;
+}
+
+
+.btn-logout {
+  margin-top: 20px;
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btn-logout:hover {
+  background-color: #c82333;
 }
