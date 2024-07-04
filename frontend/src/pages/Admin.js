@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Bar, Line } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend } from 'chart.js';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx'; 
 import './Admin.css';
-
-ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend);
 
 const fetchComplaints = async () => {
   try {
@@ -33,53 +29,11 @@ const fetchComplaints = async () => {
 const Admin = () => {
   const navigate = useNavigate();
   const [complaints, setComplaints] = useState([]);
-  const [chartData, setChartData] = useState({});
-  const [complaintsPerDayData, setComplaintsPerDayData] = useState({});
 
   useEffect(() => {
     fetchComplaints().then(data => {
       console.log('Data before setting state:', data);
       setComplaints(data);
-
-      if (Array.isArray(data)) {
-        const departments = [...new Set(data.map(complaint => complaint.department))];
-        const complaintsPerDepartment = departments.map(department =>
-          data.filter(complaint => complaint.department === department).length
-        );
-
-        setChartData({
-          labels: departments,
-          datasets: [
-            {
-              label: 'Number of Complaints',
-              data: complaintsPerDepartment,
-              backgroundColor: 'rgba(75, 192, 192, 0.6)',
-              borderColor: 'rgba(75, 192, 192, 1)',
-              borderWidth: 1,
-            },
-          ],
-        });
-
-        const dates = data.map(complaint => new Date(complaint.date).toLocaleDateString());
-        const uniqueDates = [...new Set(dates)];
-        const complaintsPerDay = uniqueDates.map(date =>
-          data.filter(complaint => new Date(complaint.date).toLocaleDateString() === date).length
-        );
-
-        setComplaintsPerDayData({
-          labels: uniqueDates,
-          datasets: [
-            {
-              label: 'Number of Complaints Per Day',
-              data: complaintsPerDay,
-              backgroundColor: 'rgba(153, 102, 255, 0.6)',
-              borderColor: 'rgba(153, 102, 255, 1)',
-              borderWidth: 1,
-              fill: false,
-            },
-          ],
-        });
-      }
     });
   }, []);
 
@@ -112,11 +66,18 @@ const Admin = () => {
     navigate('/Login');
   };
 
+  const handleGoToAnalytics = () => {
+    navigate('/Analytics');
+  };
+
   return (
     <div className="container mt-4">
       <h1 className="alert alert-info text-center">Admin - Complaint Manager</h1>
       <button className="btn btn-success mt-2" onClick={exportToExcel}>
         Export to Excel
+      </button>
+      <button className="btn btn-primary mt-2 ml-2" onClick={handleGoToAnalytics}>
+        Go to Analytics
       </button>
       <div id="complaints-container" className="mt-4">
         <ul className="list-group">
@@ -132,61 +93,6 @@ const Admin = () => {
             </li>
           ))}
         </ul>
-      </div>
-      <div className="charts-container">
-        <div className="chart-item">
-          {chartData.labels && chartData.labels.length > 0 && (
-            <Bar
-              data={chartData}
-              options={{
-                responsive: true,
-                plugins: {
-                  legend: {
-                    position: 'top',
-                  },
-                  title: {
-                    display: true,
-                    text: 'Complaints per Department',
-                  },
-                },
-              }}
-            />
-          )}
-        </div>
-        <div className="chart-item">
-          {complaintsPerDayData.labels && complaintsPerDayData.labels.length > 0 && (
-            <Line
-              data={complaintsPerDayData}
-              options={{
-                responsive: true,
-                plugins: {
-                  legend: {
-                    position: 'top',
-                  },
-                  title: {
-                    display: true,
-                    text: 'Complaints Registered Per Day',
-                  },
-                },
-                scales: {
-                  x: {
-                    title: {
-                      display: true,
-                      text: 'Date',
-                    },
-                  },
-                  y: {
-                    title: {
-                      display: true,
-                      text: 'Number of Complaints',
-                    },
-                    beginAtZero: true,
-                  },
-                },
-              }}
-            />
-          )}
-        </div>
       </div>
       <button className="btn btn-info mt-4" onClick={handleBackToLogin}>
         Logout
