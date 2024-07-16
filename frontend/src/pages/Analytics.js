@@ -10,7 +10,7 @@ const fetchComplaints = async () => {
   try {
     const token = document.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1];
 
-    const response = await fetch('http://localhost:5000/api/GetAllComplaints', {
+    const response = await fetch('https://complaintsystem-2.onrender.com/api/GetAllComplaints', {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
